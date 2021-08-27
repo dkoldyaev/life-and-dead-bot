@@ -27,7 +27,7 @@ SECRET_KEY = '39(7diune91)+spy(#8(g_t!pg$%zrh@ue)&$$zs8k1mk7k723'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['live-and-dead-bot.herokuapp.com']
+ALLOWED_HOSTS = ['powerful-shelf-33064.herokuapp.com']
 
 
 # Application definition
