@@ -1,0 +1,4 @@
+BOT_TOKEN = '<TOKEN>'
+BOT_DOMAIN = '<DOMAIN>'
+
+WEBHOOK_PATH = '/<web>/<hook>/<path>/<TOKEN>'
