@@ -22,7 +22,7 @@ from django.urls import include
 from .views import MessageView
 
 urlpatterns = [
-    url(r'^app/admin/', admin.site.urls),
-    url(r'^app/markdownx/', include('markdownx.urls')),
+    url(r'^admin/', admin.site.urls),
+    url(r'^markdownx/', include('markdownx.urls')),
     url(r'^$', MessageView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
