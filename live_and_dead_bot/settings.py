@@ -51,7 +51,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -137,9 +136,6 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_LOCATION = 'static'
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'mysite/static'),
-# ]
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
