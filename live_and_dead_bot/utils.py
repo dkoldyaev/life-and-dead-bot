@@ -61,6 +61,10 @@ def post_message(
     if reply_markup is None :
         reply_markup = {'keyboard': get_main_keyboard()}
 
+    debug_message = None
+    action = None
+    data = None
+
     if sticker_id :
         data = {
             **{
@@ -69,23 +73,15 @@ def post_message(
             },
             **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
         }
-        if settings.DEBUG :
-            api_request(
-                'post',
-                'sendMessage',
-                {
-                    'chat_id': chat_id,
-                    'text': f'```\n'
-                            f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
-                            f'\n````',
-                }
-            )
-        return (
-            'sendSticker',
-            data
-        )
+        debug_message = {
+            'chat_id': chat_id,
+            'text': f'```\n'
+                    f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
+                    f'\n````',
+        }
+        action = 'sendSticker'
 
-    if photo :
+    elif photo :
         data = {
             **{
                 'chat_id': chat_id,
@@ -96,31 +92,33 @@ def post_message(
             },
             **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
         }
-        if settings.DEBUG :
-            api_request(
-                'post',
-                'sendMessage',
-                {
-                    'chat_id': chat_id,
-                    'text': f'```'
-                            f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
-                            f'````',
-                }
-            )
-        return (
-            'sendPhoto',
-            data
-        )
-    data = {
-            **{
-                'chat_id': chat_id,
-                'text': text,
-                'parse_mode': 'html',
-                'caption_entities': ['bold', 'italic', 'strikethrough', 'pre'],
-            },
-            **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
+        debug_message = {
+            'chat_id': chat_id,
+            'text': f'```'
+                    f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
+                    f'````',
         }
-    if settings.DEBUG :
+        action = 'sendPhoto'
+
+    else:
+        data = {
+                **{
+                    'chat_id': chat_id,
+                    'text': text,
+                    'parse_mode': 'html',
+                    'caption_entities': ['bold', 'italic', 'strikethrough', 'pre'],
+                },
+                **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
+            }
+        debug_message = {
+            'chat_id': chat_id,
+            'text': f'```'
+                    f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
+                    f'````',
+        }
+        action = 'sendMessage'
+
+    if debug_message and settings.DEBUG :
         api_request(
             'post',
             'sendMessage',
@@ -131,7 +129,6 @@ def post_message(
                         f'````',
             }
         )
-    return (
-        'sendMessage',
-        data
-    )
+
+    if action and data :
+        return (action, data)
