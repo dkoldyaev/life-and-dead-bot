@@ -142,4 +142,4 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 MEDIA_URL = 'media/'
 
-django_heroku.settings(locals())
+django_heroku.settings(locals(), staticfiles=False)
