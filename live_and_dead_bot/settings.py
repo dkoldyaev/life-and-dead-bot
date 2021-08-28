@@ -25,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '39(7diune91)+spy(#8(g_t!pg$%zrh@ue)&$$zs8k1mk7k723'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['powerful-shelf-33064.herokuapp.com']
+ALLOWED_HOSTS = ['powerful-shelf-33064.herokuapp.com', 'localhost:8000', '127.0.0.1:8000']
 
 
 # Application definition
@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'live_and_dead_bot.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db3.sqlite3'),
     }
 }
 
@@ -141,5 +141,6 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 MEDIA_URL = 'media/'
+DEFAULT_FILE_STORAGE = 'live_and_dead_bot.storage_backends.MediaStorage'
 
 django_heroku.settings(locals(), staticfiles=False)
