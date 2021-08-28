@@ -125,8 +125,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-from live_and_dead_bot.local_settings.local_settings import *
-
 BOT_URL = 'https://api.telegram.org/bot%s/'
 
 AWS_ACCESS_KEY_ID = 'AKIAIT2Z5TDYPX3ARJBA'
