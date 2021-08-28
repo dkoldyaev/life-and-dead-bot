@@ -75,9 +75,9 @@ def post_message(
                 'sendMessage',
                 {
                     'chat_id': chat_id,
-                    'text': f'```'
+                    'text': f'```\n'
                             f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
-                            f'````',
+                            f'\n````',
                 }
             )
         return (
