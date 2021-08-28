@@ -129,6 +129,9 @@ from live_and_dead_bot.local_settings.local_settings import *
 
 BOT_URL = 'https://api.telegram.org/bot%s/'
 
+AWS_ACCESS_KEY_ID = 'AKIAIT2Z5TDYPX3ARJBA'
+AWS_SECRET_ACCESS_KEY = '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'
+
 AWS_STORAGE_BUCKET_NAME = 'live-and-dead'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
