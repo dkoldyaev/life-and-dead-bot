@@ -62,35 +62,56 @@ def post_message(
         reply_markup = {'keyboard': get_main_keyboard()}
 
     if sticker_id :
+        data = {
+            **{
+                'chat_id': chat_id,
+                'sticker': sticker_id
+            },
+            **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
+        }
+        if settings.DEBUG :
+            api_request(
+                'post',
+                'sendMessage',
+                {
+                    'chat_id': chat_id,
+                    'text': f'```'
+                            f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
+                            f'````',
+                }
+            )
         return (
             'sendSticker',
-            {
-                **{
-                    'chat_id': chat_id,
-                    'sticker': sticker_id
-                },
-                **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
-            }
+            data
         )
 
     if photo :
+        data = {
+            **{
+                'chat_id': chat_id,
+                'caption': text,
+                'photo': photo,
+                'parse_mode': 'html',
+                'caption_entities': ['bold', 'italic', 'strikethrough', 'pre'],
+            },
+            **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
+        }
+        if settings.DEBUG :
+            api_request(
+                'post',
+                'sendMessage',
+                {
+                    'chat_id': chat_id,
+                    'text': f'```'
+                            f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
+                            f'````',
+                }
+            )
         return (
             'sendPhoto',
-            {
-                **{
-                    'chat_id': chat_id,
-                    'caption': text,
-                    'photo': photo,
-                    'parse_mode': 'html',
-                    'caption_entities': ['bold', 'italic', 'strikethrough', 'pre'],
-                },
-                **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
-            }
+            data
         )
-
-    return (
-        'sendMessage',
-        {
+    data = {
             **{
                 'chat_id': chat_id,
                 'text': text,
@@ -99,4 +120,18 @@ def post_message(
             },
             **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
         }
+    if settings.DEBUG :
+        api_request(
+            'post',
+            'sendMessage',
+            {
+                'chat_id': chat_id,
+                'text': f'```'
+                        f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
+                        f'````',
+            }
+        )
+    return (
+        'sendMessage',
+        data
     )
