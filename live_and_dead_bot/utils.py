@@ -61,7 +61,6 @@ def post_message(
     if reply_markup is None :
         reply_markup = {'keyboard': get_main_keyboard()}
 
-    debug_message = None
     action = None
     data = None
 
@@ -72,12 +71,6 @@ def post_message(
                 'sticker': sticker_id
             },
             **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
-        }
-        debug_message = {
-            'chat_id': chat_id,
-            'text': f'```\n'
-                    f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
-                    f'\n````',
         }
         action = 'sendSticker'
 
@@ -92,12 +85,6 @@ def post_message(
             },
             **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
         }
-        debug_message = {
-            'chat_id': chat_id,
-            'text': f'```'
-                    f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
-                    f'````',
-        }
         action = 'sendPhoto'
 
     else:
@@ -110,23 +97,21 @@ def post_message(
                 },
                 **({'reply_markup': json.dumps(reply_markup)} if reply_markup else {})
             }
-        debug_message = {
-            'chat_id': chat_id,
-            'text': f'```'
-                    f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
-                    f'````',
-        }
         action = 'sendMessage'
 
-    if debug_message and settings.DEBUG :
+    if settings.DEBUG and action and data :
+        debug_data = {
+            "action": action,
+            "data": data
+        }
         api_request(
             'post',
             'sendMessage',
             {
                 'chat_id': chat_id,
-                'text': f'```'
-                        f'{json.dumps(data, sort_keys=True, indent=2, separators=(",", ": "))}'
-                        f'````',
+                'text': f'```\n'
+                        f'{json.dumps(debug_data, sort_keys=True, indent=2, separators=(",", ": "))}'
+                        f'\n````',
             }
         )
 
