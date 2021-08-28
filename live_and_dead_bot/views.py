@@ -79,4 +79,19 @@ class MessageView(View):
         if response and response.json()['ok'] and delete_message_params:
             delete_message(*delete_message_params)
 
+        if response and not response.json()['ok'] and settings.DEBUG:
+            (method, request) = (
+                'sendMessage',
+                {
+                    'chat_id': chat_id,
+                    'text': response.text
+                }
+            )
+
+            api_request(
+                'post',
+                method,
+                request
+            )
+
         return HttpResponse('ok', status=200)
