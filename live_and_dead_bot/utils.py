@@ -56,8 +56,7 @@ def post_message(
         sticker_id: Optional[str] = None,
         reply_markup: Optional[dict] = None
 ) -> (str, dict):
-    from live_and_dead_bot.models import BotData
-    bot_data: BotData = BotData.objects.get()
+    from django.conf import settings
 
     if reply_markup is None :
         reply_markup = {'keyboard': get_main_keyboard()}
@@ -81,7 +80,7 @@ def post_message(
                 **{
                     'chat_id': chat_id,
                     'caption': text,
-                    'photo': urljoin(bot_data.host, photo),
+                    'photo': photo,
                     'parse_mode': 'html',
                     'caption_entities': ['bold', 'italic', 'strikethrough', 'pre'],
                 },
