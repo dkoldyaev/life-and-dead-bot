@@ -9,7 +9,7 @@ def start_message(chart_id, message) -> (str, dict):
     return post_message(
         chart_id,
         page.text,
-        page.image.url
+        page.image.url if page.image else None
     )
 
 
@@ -19,7 +19,7 @@ def help_message(chart_id, message) -> (str, dict):
     return post_message(
         chart_id,
         page.text,
-        page.image.url
+        page.image.url if page.image else None
     )
 
 
@@ -80,7 +80,7 @@ def get_menu_callback(chat_id, message) -> (str, dict):
     return post_message(
         chat_id,
         menu_page.text,
-        menu_page.image.url,
+        menu_page.image.url if menu_page.image else None,
         None,
         {'inline_keyboard': keyboard}
     )
@@ -97,7 +97,7 @@ def show_card_callback(chat_id, params: dict) -> (str, dict):
     return post_message(
         chat_id,
         card.text,
-        card.image.url
+        card.image.url if card.image else None
     )
 
 
@@ -111,5 +111,5 @@ def get_map_callback(chat_id, params: dict) -> (str, dict):
     return post_message(
         chat_id,
         page.text,
-        page.image.url
+        page.image.url if page.image else None
     )
