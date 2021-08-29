@@ -13,12 +13,12 @@ class LinkRandomMessage(models.Model):
 
 class StickerRandomMessage(models.Model):
     id = models.AutoField(primary_key=True)
-    sticker_image_url = models.URLField(
+    sticker_image = models.ImageField(
         blank=False,
         null=False,
         max_length=255,
         verbose_name='Ссылка на стикер',
-        help_text='Скопируйте ссылку на изображение нужного стикера вот с этого https://tlgrm.ru/stickers сайта'
+        help_text='Загрузите картинку стикера. Не будет нигде отображаться -- нужно только для админки'
     )
     sticker_id = models.CharField(
         blank=False,
