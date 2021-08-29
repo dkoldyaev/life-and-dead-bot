@@ -28,7 +28,7 @@ class StickerRandomMessage(models.Model):
         help_text='Чтобы узнать ID стикера, отправьте его этому https://t.me/idstickerbot боту'
     )
     def __str__(self):
-        return mark_safe(f'<img src="{self.sticker_image}" />')
+        return mark_safe(f'<img src="{self.sticker_image.url}" style="height: 50px; width: auto;" />')
 
     class Meta:
         verbose_name = 'Стикер'
