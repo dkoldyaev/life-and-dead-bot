@@ -20,8 +20,8 @@ class CardButton(models.Model):
                   '&lt;strong&gt;<strong>bold</strong>&lt;/strong&gt;, &lt;em&gt;<em>italic</em>&lt;/em&gt;, &lt;del&gt;<del>strike</del>&lt;/del&gt;'
     )
     image = models.ImageField(
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
         upload_to='media/cards/image',
         verbose_name='Изображение'
     )
@@ -56,8 +56,8 @@ class AboutButton(models.Model):
                   '&lt;strong&gt;<strong>bold</strong>&lt;/strong&gt;, &lt;em&gt;<em>italic</em>&lt;/em&gt;, &lt;del&gt;<del>strike</del>&lt;/del&gt;'
     )
     image = models.ImageField(
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
         upload_to='media/about/image',
         verbose_name='Изображение'
     )
