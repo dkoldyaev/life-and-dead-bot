@@ -30,4 +30,4 @@ class PageAdmin(admin.ModelAdmin):
                 f'{obj.image}'
             )
         except:
-            return 'Нет изображения'
+            return obj.image
