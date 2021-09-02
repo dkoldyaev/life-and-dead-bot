@@ -24,6 +24,6 @@ class PageAdmin(admin.ModelAdmin):
     ]
     def image_preview(self, obj):
         try:
-            mark_safe(f'<img src="{obj.image.url}" style="width: 250px; height: auto;" />')
+            mark_safe(f'<img src="{obj.image.url}" style="width: 250px; height: auto;" /><br/>{obj.image.url}')
         except:
             return 'Нет изображения'
