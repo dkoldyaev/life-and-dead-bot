@@ -24,10 +24,10 @@ class PageAdmin(admin.ModelAdmin):
     ]
     def image_preview(self, obj):
         try:
-            mark_safe(
+            return mark_safe(
                 f'<img src="{obj.image.url}" style="width: 250px; height: auto;" />'
                 f'<br/>'
-                f'{obj.image}'
+                f'link: <a href="{obj.image.url}">{obj.image.url}</a>'
             )
         except:
             return obj.image

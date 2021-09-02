@@ -28,7 +28,7 @@ class CardButtonAdmin(MarkdownxModelAdmin):
         return obj.title or obj.button_text
     def image_preview(self, obj: CardButton):
         try:
-            mark_safe(f'<img src="{obj.image.url}" style="width: 250px; height: auto;" />')
+            return mark_safe(f'<img src="{obj.image.url}" style="width: 250px; height: auto;" />')
         except:
             return 'Нет изображения'
 
@@ -54,7 +54,7 @@ class AboutButtonAdmin(MarkdownxModelAdmin):
         return obj.title or obj.button_text
     def image_preview(self, obj: AboutButton):
         try:
-            mark_safe(f'<img src="{obj.image.url}" style="width: 250px; height: auto;" />')
+            return mark_safe(f'<img src="{obj.image.url}" style="width: 250px; height: auto;" />')
         except:
             return 'Нет изображения'
 
