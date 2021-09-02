@@ -86,6 +86,35 @@ def get_menu_callback(chat_id, message) -> (str, dict):
     )
 
 
+def get_about_callback(chat_id, message) -> (str, dict):
+    from pages.models import Page
+    from cards.models import AboutButton
+    keyboard = []
+    current_row = None
+    for about in AboutButton.objects.all():
+        if about.row != current_row:
+            keyboard.append([])
+            current_row = about.row
+        keyboard[len(keyboard) - 1].append({
+            'text': about.button_text,
+            'callback_data': json.dumps({
+                'data': {'about': about.id},
+                'action': 'show_about'
+            })
+        })
+
+    try:    menu_page: Page = Page.objects.get(command='about')
+    except: raise Exception('Не могу найти страницу menu')
+
+    return post_message(
+        chat_id,
+        menu_page.text,
+        menu_page.image.url if menu_page.image else None,
+        None,
+        {'inline_keyboard': keyboard}
+    )
+
+
 def show_card_callback(chat_id, params: dict) -> (str, dict):
     from cards.models import CardButton
     try:
@@ -98,6 +127,21 @@ def show_card_callback(chat_id, params: dict) -> (str, dict):
         chat_id,
         card.text,
         card.image.url if card.image else None
+    )
+
+
+def show_about_callback(chat_id, params: dict) -> (str, dict):
+    from cards.models import AboutButton
+    try:
+        about_id = params.get('about', None)
+        about: AboutButton = AboutButton.objects.get(id=about_id)
+    except:
+        raise Exception('Не могу найти страничку')
+
+    return post_message(
+        chat_id,
+        about.text,
+        about.image.url if about.image else None
     )
 
 

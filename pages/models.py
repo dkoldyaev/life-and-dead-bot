@@ -11,6 +11,7 @@ class Page(models.Model):
             ('start', '/start'),
             ('help', '/help'),
             ('map', 'Кнопка карты'),
+            ('about', 'О выставке'),
             ('menu', 'Кнопка меню'),
             ('error', 'Сообщение об ошибке'),
         ),
