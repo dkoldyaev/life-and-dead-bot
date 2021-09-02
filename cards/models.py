@@ -14,7 +14,6 @@ class CardButton(models.Model):
         blank=True,
         null=True,
         verbose_name='Текст',
-        max_length=1024,
         help_text='Для форматирование используйте '
                   '<a href="https://core.telegram.org/api/entities" target="_blank">инструкции</a>'
                   '<br/>'
@@ -51,7 +50,6 @@ class AboutButton(models.Model):
         blank=True,
         null=True,
         verbose_name='Текст',
-        max_length=1024,
         help_text='Для форматирование используйте '
                   '<a href="https://core.telegram.org/api/entities" target="_blank">инструкции</a>'
                   '<br/>'
