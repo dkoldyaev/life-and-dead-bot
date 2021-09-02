@@ -28,6 +28,6 @@ class StickerRandomMessageAdmin(admin.ModelAdmin):
     ]
     def sticker_preview(self, obj):
         try:
-            mark_safe(f'<img src="{obj.sticker_image.url}" />')
+            return mark_safe(f'<img src="{obj.sticker_image.url}" />')
         except:
             return 'Нет изображения'
