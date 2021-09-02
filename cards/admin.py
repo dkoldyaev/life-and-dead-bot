@@ -26,7 +26,10 @@ class CardButtonAdmin(MarkdownxModelAdmin):
     def list_link(self, obj: CardButton):
         return obj.title or obj.button_text
     def image_preview(self, obj: CardButton):
-        return mark_safe(f'<img src="{obj.image.url}" style="width: 200px; height: auto" />')
+        try:
+            mark_safe(f'<img src="{obj.image.url}" style="width: 250px; height: auto;" />')
+        except:
+            return 'Нет изображения'
 
 @admin.register(MainMenuButtons)
 class MainMenuAdmin(admin.ModelAdmin):
