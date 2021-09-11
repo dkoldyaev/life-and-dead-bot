@@ -27,8 +27,8 @@ class CardButton(models.Model):
     )
 
     button_text = models.CharField(blank=False, null=False, max_length=50, verbose_name='Текст кнопки')
-    row = models.IntegerField(blank=False, null=False, verbose_name='Номер ряда кнопки')
-    col = models.IntegerField(blank=False, null=False, verbose_name='Порядок кнопки в ряду')
+    row = models.IntegerField(blank=False, null=False, db_index=True, verbose_name='Номер ряда кнопки')
+    col = models.IntegerField(blank=False, null=False, db_index=True, verbose_name='Порядок кнопки в ряду')
 
     def __str__(self):
         return f'-{self.row}-{self.col}-{self.button_text}'
@@ -63,8 +63,8 @@ class AboutButton(models.Model):
     )
 
     button_text = models.CharField(blank=False, null=False, max_length=50, verbose_name='Текст кнопки')
-    row = models.IntegerField(blank=False, null=False, verbose_name='Номер ряда кнопки')
-    col = models.IntegerField(blank=False, null=False, verbose_name='Порядок кнопки в ряду')
+    row = models.IntegerField(blank=False, null=False, db_index=True, verbose_name='Номер ряда кнопки')
+    col = models.IntegerField(blank=False, null=False, db_index=True, verbose_name='Порядок кнопки в ряду')
 
     def __str__(self):
         return f'-{self.row}-{self.col}-{self.button_text}'
@@ -94,8 +94,8 @@ class MainMenuButtons(models.Model):
             ('get_about', 'О выставке')
         ]
     )
-    row = models.IntegerField(blank=False, null=False, verbose_name='Номер ряда кнопки', default=1)
-    col = models.IntegerField(blank=False, null=False, verbose_name='Порядок кнопки в ряду', default=1)
+    row = models.IntegerField(blank=False, null=False, db_index=True, verbose_name='Номер ряда кнопки', default=1)
+    col = models.IntegerField(blank=False, null=False, db_index=True, verbose_name='Порядок кнопки в ряду', default=1)
 
     def __str__(self):
         return f'-{self.row}-{self.col}-{self.text}'

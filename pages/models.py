@@ -7,6 +7,7 @@ class Page(models.Model):
         blank=False,
         null=False,
         max_length=255,
+        db_index=True,
         choices=(
             ('start', '/start'),
             ('help', '/help'),
