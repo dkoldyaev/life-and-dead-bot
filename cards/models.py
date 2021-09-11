@@ -80,6 +80,7 @@ class MainMenuButtons(models.Model):
         blank=False,
         null=False,
         max_length=255,
+        db_index=True,
         verbose_name='Текст кнопки'
     )
     action = models.CharField(
